@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Backend\BikeManagement;
 
 use App\Http\Controllers\Controller;
+use App\Models\Backend\BikeManagement\BikeMotorType;
 use Illuminate\Http\Request;
 
 class BikeMotorTypeController extends Controller
@@ -12,7 +13,9 @@ class BikeMotorTypeController extends Controller
      */
     public function index()
     {
-        //
+        return view('backend.bike-management.bike-motor-type.index',[
+            'bikeMotorTypes'=>BikeMotorType::all(),
+        ]);
     }
 
     /**
@@ -20,7 +23,7 @@ class BikeMotorTypeController extends Controller
      */
     public function create()
     {
-        //
+        return view('backend.bike-management.bike-motor-type.create');
     }
 
     /**
@@ -28,7 +31,8 @@ class BikeMotorTypeController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        BikeMotorType::saveOrUpdatebikeMotorType($request);
+        return redirect()->route('admin.bike-motor-types.index')->with('success','Bike Motor Type Create Successfully');
     }
 
     /**
@@ -44,7 +48,9 @@ class BikeMotorTypeController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        return view('backend.bike-management.bike-motor-type.create',[
+            'bikeMotorType' => BikeMotorType::where('id',$id)->first(),
+        ]);
     }
 
     /**
@@ -52,7 +58,8 @@ class BikeMotorTypeController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        BikeMotorType::saveOrUpdatebikeMotorType($request,$id);
+        return redirect()->route('admin.bike-motor-types.index')->with('success','Bike Motor Type Updated Successfully');
     }
 
     /**
@@ -60,6 +67,14 @@ class BikeMotorTypeController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $bikeMotorType = BikeMotorType::where('id',$id)->first();
+        if ($bikeMotorType)
+        {
+            if (file_exists($bikeMotorType->image)){
+                unlink($bikeMotorType->image);
+            }
+            $bikeMotorType->delete();
+        }
+        return redirect()->route('admin.bike-motor-types.index')->with('success','bike Motor Type Delete Successfully');
     }
 }

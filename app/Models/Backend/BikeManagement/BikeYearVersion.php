@@ -17,6 +17,18 @@ class BikeYearVersion extends Model
 
     protected $table = 'bike_year_versions';
 
+    protected static $bikeYearVersions;
+
+    public static function saveOrUpdatebikeYearVersion($request, $id = null)
+    {
+        BikeYearVersion::updateOrCreate(['id' => $id], [
+            'name'   => $request->name,
+            'info'   => $request->info,
+            'status' => $request->status == 'on' ? 1 : 0,
+        ]);
+    }
+
+
     public function motorBikes()
     {
         return $this->hasMany(MotorBike::class);

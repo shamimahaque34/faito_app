@@ -1,6 +1,6 @@
 @extends('backend.master')
 
-@section('title', 'Create Bike Brand Categories')
+@section('title', 'Create Bike Brand')
 
 @section('body')
     <div class="row mt-5">

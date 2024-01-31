@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Backend\BikeManagement;
 
 use App\Http\Controllers\Controller;
+use App\Models\Backend\BikeManagement\BikeEngineSize;
 use Illuminate\Http\Request;
 
 class BikeEngineSizeController extends Controller
@@ -12,7 +13,9 @@ class BikeEngineSizeController extends Controller
      */
     public function index()
     {
-        //
+        return view('backend.bike-management.bike-engine-size.index',[
+            'bikeEngineSizes'=>BikeEngineSize::all(),
+        ]);
     }
 
     /**
@@ -20,7 +23,7 @@ class BikeEngineSizeController extends Controller
      */
     public function create()
     {
-        //
+        return view('backend.bike-management.bike-engine-size.create');
     }
 
     /**
@@ -28,7 +31,8 @@ class BikeEngineSizeController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        BikeEngineSize::saveOrUpdatebikeEngineSize($request);
+        return redirect()->route('admin.bike-engine-sizes.index')->with('success','Bike Engine Size Create Successfully');
     }
 
     /**
@@ -44,7 +48,9 @@ class BikeEngineSizeController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        return view('backend.bike-management.bike-engine-size.create',[
+            'bikeEngineSize' => BikeEngineSize::where('id',$id)->first(),
+        ]);
     }
 
     /**
@@ -52,7 +58,8 @@ class BikeEngineSizeController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        BikeEngineSize::saveOrUpdatebikeEngineSize($request,$id);
+        return redirect()->route('admin.bike-engine-sizes.index')->with('success','Bike Engine Size Updated Successfully');
     }
 
     /**
@@ -60,6 +67,10 @@ class BikeEngineSizeController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $bikeEngineSize = BikeEngineSize::where('id',$id)->first();
+        
+        $bikeEngineSize->delete();
+        
+        return redirect()->route('admin.bike-engine-sizes.index')->with('success','bike Engine Size Delete Successfully');
     }
 }

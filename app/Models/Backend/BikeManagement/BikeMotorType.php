@@ -17,10 +17,22 @@ class BikeMotorType extends Model
 
     protected $table = 'bike_motor_types';
 
-    public function contacts()
+    protected static $bikeMotorTypes;
+
+    public static function saveOrUpdatebikeMotorType($request, $id = null)
     {
-        return $this->hasMany(Contact::class);
+        BikeMotorType::updateOrCreate(['id' => $id], [
+            'name'       => $request->name,
+            'other_info' => $request->other_info,
+            'image'      => isset($id) ? fileUpload($request->file('image'), 'image/', 'bike-motor-type-image', '400', '650', BikeMotorType::find($id)->image) : fileUpload($request->file('image'), 'image/', 'bike-motor-type-image', '400', '650'),
+            'status'      => $request->status == 'on' ? 1 : 0,
+        ]);
     }
+
+    // public function contacts()
+    // {
+    //     return $this->hasMany(Contact::class);
+    // }
 
     public function motorBikes()
     {

@@ -17,6 +17,17 @@ class BikeEngineSize extends Model
 
     protected $table = 'bike_engine_sizes';
 
+    protected static $bikeEngineSizes;
+
+    public static function saveOrUpdatebikeEngineSize($request, $id = null)
+    {
+        BikeEngineSize::updateOrCreate(['id' => $id], [
+            'name'   => $request->name,
+            'info'   => $request->info,
+            'status' => $request->status == 'on' ? 1 : 0,
+        ]);
+    }
+
     public function motorBikes()
     {
         return $this->hasMany(MotorBike::class);

@@ -1,23 +1,22 @@
 @extends('backend.master')
 
-@section('title', 'Manage Bike Brand Categories')
+@section('title', 'Manage Bike Brand')
 
 @section('body')
     <div class="row mt-5">
         <div class="col-md-12">
             <div class="card">
                 <div class="card-header">
-                    <h3>Manage Bike Brand Categories</h3>
+                    <h3>Manage Bike Brand</h3>
                     <a href="{{ route('admin.bike-brands.create') }}" class="btn btn-success btn-sm position-absolute me-5" style="right: 0"><i class="fa fa-plus-circle"></i></a>
                 </div>
                 <div class="card-body">
                     <table class="table">
                         <thead>
                         <th>#</th>
-                        <th>Title</th>
-                        <th>Note</th>
-                        <th>Icon</th>
-                        <th>Image</th>
+                        <th>Name</th>
+                        <th>Description</th>
+                        <th>Logo</th>
                         <th>Status</th>
                         <th>Action</th>
                         </thead>

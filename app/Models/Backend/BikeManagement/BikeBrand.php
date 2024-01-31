@@ -19,12 +19,12 @@ class BikeBrand extends Model
 
     protected static $bikeBrands;
 
-    public static function saveOrUpdateSubject($request, $id = null)
+    public static function saveOrUpdatebikeBrand($request, $id = null)
     {
         BikeBrand::updateOrCreate(['id' => $id], [
             'name'        => $request->name,
             'description' => $request->description,
-            'logo'        => isset($id) ? imageUpload($request->file('logo'), 'logo/', 'bike-brand-logo', '400', '650', BikeBrand::find($id)->logo) : imageUpload($request->file('logo'), 'logo/', 'bike-brand-logo', '400', '650'),
+            'logo'        => isset($id) ? fileUpload($request->file('logo'), 'logo/', 'bike-brand-logo', '400', '650', BikeBrand::find($id)->logo) : fileUpload($request->file('logo'), 'logo/', 'bike-brand-logo', '400', '650'),
             'status'      => $request->status == 'on' ? 1 : 0,
         ]);
     }

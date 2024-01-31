@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Backend\BikeManagement;
 
 use App\Http\Controllers\Controller;
+use App\Models\Backend\BikeManagement\BikeYearVersion;
 use Illuminate\Http\Request;
 
 class BikeYearVersionController extends Controller
@@ -12,7 +13,9 @@ class BikeYearVersionController extends Controller
      */
     public function index()
     {
-        //
+        return view('backend.bike-management.bike-year-version.index',[
+            'bikeYearVersions'=>BikeYearVersion::all(),
+        ]);
     }
 
     /**
@@ -20,7 +23,7 @@ class BikeYearVersionController extends Controller
      */
     public function create()
     {
-        //
+        return view('backend.bike-management.bike-year-version.create');
     }
 
     /**
@@ -28,7 +31,8 @@ class BikeYearVersionController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        BikeYearVersion::saveOrUpdatebikeYearVersion($request);
+        return redirect()->route('admin.bike-year-versions.index')->with('success','Bike year Version Create Successfully');
     }
 
     /**
@@ -44,7 +48,9 @@ class BikeYearVersionController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        return view('backend.bike-management.bike-year-version.create',[
+            'bikeYearVersion' => BikeYearVersion::where('id',$id)->first(),
+        ]);
     }
 
     /**
@@ -52,7 +58,8 @@ class BikeYearVersionController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        BikeYearVersion::saveOrUpdatebikeYearVersion($request,$id);
+        return redirect()->route('admin.bike-year-versions.index')->with('success','Bike year Version Updated Successfully');
     }
 
     /**
@@ -60,6 +67,10 @@ class BikeYearVersionController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $bikeYearVersion = BikeYearVersion::where('id',$id)->first();
+        
+            $bikeYearVersion->delete();
+        
+        return redirect()->route('admin.bike-year-versions.index')->with('success','bike Year Version Delete Successfully');
     }
 }

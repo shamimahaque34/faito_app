@@ -32,7 +32,7 @@ class BikeBrandController extends Controller
     public function store(Request $request)
     {
         BikeBrand::saveOrUpdatebikeBrand($request);
-        return redirect()->route('bike-brands.index')->with('success','Bike Brand Create Successfully');
+        return redirect()->route('admin.bike-brands.index')->with('success','Bike Brand Create Successfully');
     }
     
 
@@ -60,7 +60,7 @@ class BikeBrandController extends Controller
     public function update(Request $request, string $id)
     {
         BikeBrand::saveOrUpdatebikeBrand($request,$id);
-        return redirect()->route('bikeBrands.index')->with('success','Bike Brand Create Successfully');
+        return redirect()->route('admin.bike-brands.index')->with('success','Bike Brand Update Successfully');
     }
 
     /**
@@ -76,7 +76,7 @@ class BikeBrandController extends Controller
             }
             $bikeBrand->delete();
         }
-        return redirect()->route('bike-brands.index')->with('success','bike Brand Delete Successfully');
+        return redirect()->route('admin.bike-brands.index')->with('success','bike Brand Delete Successfully');
     }
 
 
