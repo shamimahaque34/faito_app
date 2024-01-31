@@ -3,6 +3,11 @@
 namespace App\Http\Controllers\Backend\BikeManagement;
 
 use App\Http\Controllers\Controller;
+use App\Models\Backend\BikeManagement\BikeBrand;
+use App\Models\Backend\BikeManagement\BikeEngineSize;
+use App\Models\Backend\BikeManagement\BikeMotorType;
+use App\Models\Backend\BikeManagement\BikeYearVersion;
+use App\Models\Backend\BikeManagement\MotorBike;
 use Illuminate\Http\Request;
 
 class MotorBikeController extends Controller
@@ -12,7 +17,14 @@ class MotorBikeController extends Controller
      */
     public function index()
     {
-        //
+        return view('backend.bike-management.motor-bike.index',[
+            'motorBikes'       =>MotorBike::all(),
+            'bikeBrands'       =>BikeBrand::all(),
+            'bikeEngineSizes'  =>BikeEngineSize::all(),
+            'bikeMotorTypes'   =>BikeMotorType::all(),
+            'BikeYearVersions' =>BikeYearVersion::all(),
+
+        ]);
     }
 
     /**
@@ -20,7 +32,13 @@ class MotorBikeController extends Controller
      */
     public function create()
     {
-        //
+        return view('backend.bike-management.motor-bike.create',[
+            'bikeBrands'       =>BikeBrand::all(),
+            'bikeEngineSizes'  =>BikeEngineSize::all(),
+            'bikeMotorTypes'   =>BikeMotorType::all(),
+            'BikeYearVersions' =>BikeYearVersion::all(),
+
+        ]);
     }
 
     /**
@@ -28,7 +46,8 @@ class MotorBikeController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        MotorBike::saveOrUpdateMotorBike($request);
+        return redirect()->route('admin.motor-bikes.index')->with('success','Motor Bike Create Successfully');
     }
 
     /**
@@ -44,7 +63,14 @@ class MotorBikeController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        return view('backend.bike-management.motor-bike.create',[
+            'bikeBrands'       =>BikeBrand::all(),
+            'bikeEngineSizes'  =>BikeEngineSize::all(),
+            'bikeMotorTypes'   =>BikeMotorType::all(),
+            'BikeYearVersions' =>BikeYearVersion::all(),
+            'motorBike'        =>MotorBike::where('id',$id)->first(),
+
+        ]);
     }
 
     /**
@@ -52,7 +78,8 @@ class MotorBikeController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        MotorBike::saveOrUpdateMotorBike($request,$id);
+        return redirect()->route('admin.motor-bikes.index')->with('success','Motor Bike Updated Successfully');
     }
 
     /**
@@ -60,6 +87,14 @@ class MotorBikeController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $motorBike = MotorBike::where('id',$id)->first();
+        if ($motorBike)
+        {
+            if (file_exists($motorBike->image)){
+                unlink($motorBike->image);
+            }
+            $motorBike->delete();
+        }
+        return redirect()->route('admin.motor-bikes.index')->with('success','Motor Bike Delete Successfully');
     }
 }

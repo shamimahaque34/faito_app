@@ -29,10 +29,29 @@ class MotorBike extends Model
 
     protected $table = 'motor_bikes';
 
-    public function testimonials()
+    protected static $motorBikes;
+
+    public static function saveOrUpdateMotorBike($request, $id = null)
     {
-        return $this->hasMany(Testimonial::class, 'parent_model_id');
+        MotorBike::updateOrCreate(['id' => $id], [
+            'bike_brand_id'        =>$request->bike_brand_id,
+            'bike_motor_type_id'   =>$request->bike_motor_type_id,
+            'bike_engine_size_id'  =>$request->bike_engine_size_id,
+            'bike_year_version_id' =>$request->bike_year_version_id,
+            'model_name'           => $request->model_name,
+            'size'                 => $request->size,
+            'image'                => isset($id) ? fileUpload($request->file('image'), 'image/', 'motor-bike-image', '400', '650', MotorBike::find($id)->logo) : fileUpload($request->file('image'), 'image/', 'motor-bike-image', '400', '650'),
+            'variant'              =>$request->variant,
+            'sku'                  =>$request->sku,
+            'slug'                 =>str_replace(' ', '-', $request->model_name),
+            'status'               => $request->status == 'on' ? 1 : 0,
+        ]);
     }
+
+    // public function testimonials()
+    // {
+    //     return $this->hasMany(Testimonial::class, 'parent_model_id');
+    // }
 
     public function bikeBrand()
     {
@@ -54,8 +73,8 @@ class MotorBike extends Model
         return $this->belongsTo(BikeYearVersion::class);
     }
 
-    public function partsProducts()
-    {
-        return $this->belongsToMany(PartsProduct::class);
-    }
+    // public function partsProducts()
+    // {
+    //     return $this->belongsToMany(PartsProduct::class);
+    // }
 }
