@@ -29,19 +29,79 @@
                             </div>
                             @error('bike_brand_id') <span class="text-danger">{{ $errors->first('bike_brand_id') }}</span>@enderror
                         </div>
+
                         <div class="row mt-3">
-                            <label for="" class="col-md-4"> Model Name</label>
+                            <label for="" class="col-md-4"> Bike Enzine Size </label>
+                            <div class="col-md-8">
+                                <select name="bike_engine_size_id" class=" form-control " data-toggle="select" data-placeholder="Choose ...">
+                                    <option value="">Select a Bike Engine Size</option>
+                                    @foreach($bikeEngineSizes as $bikeEngineSize)
+                                        <option value="{{ $bikeEngineSize->id }}" {{ $errors->any() ? (old('bike_engine_size_id')) :(isset($motorBike) && $motorBike->bike_engine_size_id == $bikeEngineSize->id ? 'selected' : '')}}> {{ $bikeEngineSize->name }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            @error('bike_engine_size_id') <span class="text-danger">{{ $errors->first('bike_engine_size_id') }}</span>@enderror
+                        </div>
+
+
+                        <div class="row mt-3">
+                            <label for="" class="col-md-4"> Bike Motor Type</label>
+                            <div class="col-md-8">
+                                <select name="bike_motor_type_id" class=" form-control " data-toggle="select" data-placeholder="Choose ...">
+                                    <option value="">Select a Bike Motor Type</option>
+                                    @foreach($bikeMotorTypes as $bikeMotorType)
+                                        <option value="{{ $bikeMotorType->id }}" {{ $errors->any() ? (old('bike_motor_type_id')) :(isset($motorBike) && $motorBike->bike_motor_type_id== $bikeMotorType->id ? 'selected' : '')}}> {{ $bikeMotorType->name }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            @error('bike_motor_type_id') <span class="text-danger">{{ $errors->first('bike_motor_type_id') }}</span>@enderror
+                        </div>
+
+                        <div class="row mt-3">
+                            <label for="" class="col-md-4"> Bike Year Version</label>
+                            <div class="col-md-8">
+                                <select name="bike_year_version_id" class=" form-control " data-toggle="select" data-placeholder="Choose ...">
+                                    <option value="">Select a Bike Year Version</option>
+                                    @foreach($bikeYearVersions as $bikeYearVersion)
+                                        <option value="{{ $bikeYearVersion->id }}" {{ $errors->any() ? (old('bike_year_version_id')) :(isset($motorBike) && $motorBike->bike_year_version_id== $bikeYearVersion->id ? 'selected' : '')}}> {{ $bikeYearVersion->name }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            @error('bike_year_version_id') <span class="text-danger">{{ $errors->first('bike_year_version_id') }}</span>@enderror
+                        </div>
+
+                        <div class="row mt-3">
+                            <label for="" class="col-md-4">Model Name</label>
                             <div class="col-md-8">
                                 <input type="text" name="name" class="form-control" value="{{ isset($motorBike) ? $motorBike->model_name : '' }}" placeholder=" Motor Bike Model Name" />
                             </div>
                             @error('model_name') <span class="text-danger">{{ $errors->first('model_name') }}</span>@enderror
                         </div>
+
                         <div class="row mt-3">
-                            <label for="" class="col-md-4">Other Info</label>
+                            <label for="" class="col-md-4">Size</label>
                             <div class="col-md-8">
-                                <textarea type="text" name="other_info" class="form-control" placeholder="Bike Motor Type Other Info" id="" cols="30" rows="5">{{ isset($motorBike) ? $motorBike->other_info : '' }}</textarea>
+                                <input type="text" name="size" class="form-control" value="{{ isset($motorBike) ? $motorBike->size : '' }}" placeholder=" Motor Bike Size" />
                             </div>
+                            @error('size') <span class="text-danger">{{ $errors->first('size') }}</span>@enderror
                         </div>
+
+                        <div class="row mt-3">
+                            <label for="" class="col-md-4">Variant</label>
+                            <div class="col-md-8">
+                                <input type="text" name="variant" class="form-control" value="{{ isset($motorBike) ? $motorBike->variant : '' }}" placeholder=" Motor Bike Variant" />
+                            </div>
+                            @error('variant') <span class="text-danger">{{ $errors->first('variant') }}</span>@enderror
+                        </div>
+
+                        <div class="row mt-3">
+                            <label for="" class="col-md-4">Sku</label>
+                            <div class="col-md-8">
+                                <input type="text" name="sku" class="form-control" value="{{ isset($motorBike) ? $motorBike->sku : '' }}" placeholder=" Motor Bike Sku" />
+                            </div>
+                            @error('sku') <span class="text-danger">{{ $errors->first('sku') }}</span>@enderror
+                        </div>
+
                         <div class="row mt-3">
                             <label for="" class="col-md-4">Image</label>
                             <div class="col-md-8">

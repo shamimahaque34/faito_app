@@ -24,6 +24,20 @@ class PartsBrandCategory extends Model
 
     protected $table = 'parts_brand_categories';
 
+    protected static $bikeBrands;
+
+    public static function saveOrUpdatePartsBrandCategory($request, $id = null)
+    {
+        PartsBrandCategory::updateOrCreate(['id' => $id], [
+            'parts_parent_brand_id'   =>$request->parts_parent_brand_id,
+            'parts_brand_category_id' =>$request->parts_brand_category_id,
+            'name'                    => $request->name,
+            'description'             => $request->description,
+            'image'                   => isset($id) ? fileUpload($request->file('image'), 'logo/', 'parts-brand-image', '400', '650', PartsBrandCategory::find($id)->image) : fileUpload($request->file('image'), 'image/', 'parts-brand-image', '400', '650'),
+            'status'                  => $request->status == 'on' ? 1 : 0,
+        ]);
+    }
+
     public function partsParentBrand()
     {
         return $this->belongsTo(PartsParentBrand::class);

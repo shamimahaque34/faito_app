@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Backend\PartsManagement;
 
 use App\Http\Controllers\Controller;
+use App\Models\Backend\PartsManagement\PartsBrandCategory;
 use Illuminate\Http\Request;
 
 class PartsBrandCategoryController extends Controller
@@ -12,7 +13,9 @@ class PartsBrandCategoryController extends Controller
      */
     public function index()
     {
-        //
+        return view('backend.parts-management.parts-brand-category.index',[
+            'partsBrandCategories'=>PartsBrandCategory::all(),
+        ]);
     }
 
     /**

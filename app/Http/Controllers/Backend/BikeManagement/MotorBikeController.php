@@ -22,7 +22,7 @@ class MotorBikeController extends Controller
             'bikeBrands'       =>BikeBrand::all(),
             'bikeEngineSizes'  =>BikeEngineSize::all(),
             'bikeMotorTypes'   =>BikeMotorType::all(),
-            'BikeYearVersions' =>BikeYearVersion::all(),
+            'bikeYearVersions' =>BikeYearVersion::all(),
 
         ]);
     }
@@ -36,7 +36,7 @@ class MotorBikeController extends Controller
             'bikeBrands'       =>BikeBrand::all(),
             'bikeEngineSizes'  =>BikeEngineSize::all(),
             'bikeMotorTypes'   =>BikeMotorType::all(),
-            'BikeYearVersions' =>BikeYearVersion::all(),
+            'bikeYearVersions' =>BikeYearVersion::all(),
 
         ]);
     }
@@ -67,7 +67,7 @@ class MotorBikeController extends Controller
             'bikeBrands'       =>BikeBrand::all(),
             'bikeEngineSizes'  =>BikeEngineSize::all(),
             'bikeMotorTypes'   =>BikeMotorType::all(),
-            'BikeYearVersions' =>BikeYearVersion::all(),
+            'bikeYearVersions' =>BikeYearVersion::all(),
             'motorBike'        =>MotorBike::where('id',$id)->first(),
 
         ]);
