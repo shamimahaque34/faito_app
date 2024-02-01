@@ -17,6 +17,18 @@ class PartsParentBrand extends Model
 
     protected $table = 'parts_parent_brands';
 
+    protected static $bikeBrands;
+
+    public static function saveOrUpdatePartsParentBrand($request, $id = null)
+    {
+        PartsParentBrand::updateOrCreate(['id' => $id], [
+            'name'        => $request->name,
+            'description' => $request->description,
+            'logo'        => isset($id) ? fileUpload($request->file('logo'), 'logo/', 'parts-parent-brand-logo', '400', '650', PartsParentBrand::find($id)->logo) : fileUpload($request->file('logo'), 'logo/', 'parts-parent-brand-logo', '400', '650'),
+            'status'      => $request->status == 'on' ? 1 : 0,
+        ]);
+    }
+
     public function partsBrandCategories()
     {
         return $this->hasMany(PartsBrandCategory::class);
