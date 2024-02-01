@@ -1,0 +1,54 @@
+@extends('backend.master')
+
+@section('title', 'Manage Parts Product')
+
+@section('body')
+    <div class="row mt-5">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header">
+                    <h3>Manage parts Product</h3>
+                    <a href="{{ route('admin.parts-products.create') }}" class="btn btn-success btn-sm position-absolute me-5" style="right: 0"><i class="fa fa-plus-circle"></i></a>
+                </div>
+                <div class="card-body">
+                    <table class="table">
+                        <thead>
+                        <th>#</th>
+                        <th>Parts Brand Category</th>
+                        <th>Title</th>
+                        <th>Sub Title</th>
+                        <th>Short Description</th>
+                        <th>Long Description</th>
+                        <th>Features</th>
+                        <th>Sku</th>
+                        <th>Main Image</th>
+                        <th>Sub Images</th>
+                        <th>Status</th>
+                        <th>Action</th>
+                        </thead>
+                        <tbody>
+                        @foreach($partsProducts as $partsProduct)
+                            <tr>
+                                <td>{{ $loop->iteration }}</td>
+                                <td>{{ $partsProduct->partsBrandCategory->name }}</td>
+                                <td>{{ $partsProduct->name }}</td>
+                                <td>{{ $partsProduct->description }}</td>
+                                <td><img src="{{ asset($partsProduct->image )}}" alt="" style="height: 60px"></td>
+                                <td>{{ $partsProduct->status == 1 ? 'Published' : 'Unpublished' }}</td>
+                                <td class="d-flex">
+                                    <a href="{{ route('admin.parts-brand-categories.edit', $partsProduct->id) }}" class="btn btn-sm btn-primary"><i class="fa fa-edit"></i></a>
+                                    <form action="{{ route('admin.parts-brand-categories.destroy', $partsProduct->id) }}" method="post" id="deleteItem">
+                                        @csrf
+                                        @method('delete')
+                                        <button type="submit" class="btn btn-sm btn-danger ms-1 delete-item"><i class="fa fa-trash"></i></button>
+                                    </form>
+                                </td>
+                            </tr>
+                        @endforeach
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+@endsection

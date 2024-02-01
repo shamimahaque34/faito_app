@@ -29,6 +29,25 @@ class PartsProduct extends Model
 
     protected $table = 'parts_products';
 
+    protected static $partsProducts;
+
+    public static function saveOrUpdatePartsProduct($request, $id = null)
+    {
+        PartsProduct::updateOrCreate(['id' => $id], [
+            'parts_brand_category_id' =>$request->parts_brand_category_id,
+            'title'                   => $request->title,
+            'sub_title'               => $request->sub_title,
+            'short_description'       => $request->short_description,
+            'long_description'        => $request->long_description,
+            'features'                => $request->features,
+            'sku'                     => $request->sku,
+            'main_image' =>fileUpload($request->file('main_image'), 'parts-management/parts-product', isset($id) ? static::find($id)->main_image : ''),
+
+            'sub_images' =>fileUpload($request->file('sub_images'), 'parts-management/parts-product', isset($id) ? static::find($id)->sub_images : ''),
+            'status'                 => $request->status == 'on' ? 1 : 0,
+        ]);
+    }
+
     public function testimonials()
     {
         return $this->hasMany(Testimonial::class, 'parent_model_id');

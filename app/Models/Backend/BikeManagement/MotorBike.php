@@ -40,7 +40,7 @@ class MotorBike extends Model
             'bike_year_version_id' =>$request->bike_year_version_id,
             'model_name'           => $request->model_name,
             'size'                 => $request->size,
-            'image'                => isset($id) ? fileUpload($request->file('image'), 'image/', 'motor-bike-image', '400', '650', MotorBike::find($id)->logo) : fileUpload($request->file('image'), 'image/', 'motor-bike-image', '400', '650'),
+            'image' =>fileUpload($request->file('image'), 'bike-management/motor-bike', isset($id) ? static::find($id)->image : ''),
             'variant'              =>$request->variant,
             'sku'                  =>$request->sku,
             'slug'                 =>str_replace(' ', '-', $request->model_name),

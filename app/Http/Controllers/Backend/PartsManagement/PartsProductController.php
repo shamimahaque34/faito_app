@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Backend\PartsManagement;
 
 use App\Http\Controllers\Controller;
+use App\Models\Backend\PartsManagement\PartsBrandCategory;
+use App\Models\Backend\PartsManagement\PartsProduct;
 use Illuminate\Http\Request;
 
 class PartsProductController extends Controller
@@ -12,7 +14,10 @@ class PartsProductController extends Controller
      */
     public function index()
     {
-        //
+        return view('backend.parts-management.parts-product.index',[
+            'partsBrandCategories'=>PartsBrandCategory::all(),
+            'partsProducts'       =>PartsProduct::all(),
+        ]);
     }
 
     /**
@@ -20,7 +25,9 @@ class PartsProductController extends Controller
      */
     public function create()
     {
-        //
+        return view('backend.parts-management.parts-product.create',[
+            'partsBrandCategories'=>PartsBrandCategory::all(),
+        ]);
     }
 
     /**
@@ -28,7 +35,8 @@ class PartsProductController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        PartsProduct::saveOrUpdatePartsProduct($request);
+        return redirect()->route('admin.parts-products.index')->with('success','Parts Product Create Successfully');
     }
 
     /**
@@ -44,7 +52,10 @@ class PartsProductController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        return view('backend.parts-management.parts-product.create',[
+            'partsBrandCategories'=>PartsBrandCategory::all(),
+            'partsProduct' => PartsProduct::where('id',$id)->first(),
+        ]);
     }
 
     /**
@@ -52,7 +63,8 @@ class PartsProductController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        PartsProduct::saveOrUpdatePartsProduct($request,$id);
+        return redirect()->route('admin.parts-products.index')->with('success','Parts Product Updated Successfully');
     }
 
     /**
@@ -60,6 +72,18 @@ class PartsProductController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $partsProduct = PartsProduct::where('id',$id)->first();
+        if ($partsProduct)
+        {
+            if (file_exists($partsProduct->main_image)){
+                unlink($partsProduct->main_image);
+            }
+
+            if (file_exists($partsProduct->sub_images)){
+                unlink($partsProduct->sub_images);
+            }
+            $partsProduct->delete();
+        }
+        return redirect()->route('admin.parts-products.index')->with('success','Parts Product Delete Successfully');
     }
 }

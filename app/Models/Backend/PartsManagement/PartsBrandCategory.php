@@ -33,7 +33,7 @@ class PartsBrandCategory extends Model
             'parts_brand_category_id' =>$request->parts_brand_category_id,
             'name'                    => $request->name,
             'description'             => $request->description,
-            'image'                   => isset($id) ? fileUpload($request->file('image'), 'logo/', 'parts-brand-image', '400', '650', PartsBrandCategory::find($id)->image) : fileUpload($request->file('image'), 'image/', 'parts-brand-image', '400', '650'),
+            'image' =>fileUpload($request->file('image'), 'parts-management/parts-brand-category', isset($id) ? static::find($id)->image : ''),
             'status'                  => $request->status == 'on' ? 1 : 0,
         ]);
     }

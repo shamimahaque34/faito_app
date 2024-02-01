@@ -24,7 +24,7 @@ class BikeBrand extends Model
         BikeBrand::updateOrCreate(['id' => $id], [
             'name'        => $request->name,
             'description' => $request->description,
-            'logo'        => isset($id) ? fileUpload($request->file('logo'), 'logo/', 'bike-brand-logo', '400', '650', BikeBrand::find($id)->logo) : fileUpload($request->file('logo'), 'logo/', 'bike-brand-logo', '400', '650'),
+            'logo' =>fileUpload($request->file('logo'), 'bike-management/ bike-brand', isset($id) ? static::find($id)->logo : ''),
             'status'      => $request->status == 'on' ? 1 : 0,
         ]);
     }

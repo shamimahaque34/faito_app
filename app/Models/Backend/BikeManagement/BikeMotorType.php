@@ -24,7 +24,7 @@ class BikeMotorType extends Model
         BikeMotorType::updateOrCreate(['id' => $id], [
             'name'       => $request->name,
             'other_info' => $request->other_info,
-            'image'      => isset($id) ? fileUpload($request->file('image'), 'image/', 'bike-motor-type-image', '400', '650', BikeMotorType::find($id)->image) : fileUpload($request->file('image'), 'image/', 'bike-motor-type-image', '400', '650'),
+            'image' =>fileUpload($request->file('image'), 'bike-management/ bike-motor-type', isset($id) ? static::find($id)->image : ''),
             'status'      => $request->status == 'on' ? 1 : 0,
         ]);
     }

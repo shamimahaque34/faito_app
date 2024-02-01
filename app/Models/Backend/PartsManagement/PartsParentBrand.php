@@ -24,7 +24,7 @@ class PartsParentBrand extends Model
         PartsParentBrand::updateOrCreate(['id' => $id], [
             'name'        => $request->name,
             'description' => $request->description,
-            'logo'        => isset($id) ? fileUpload($request->file('logo'), 'logo/', 'parts-parent-brand-logo', '400', '650', PartsParentBrand::find($id)->logo) : fileUpload($request->file('logo'), 'logo/', 'parts-parent-brand-logo', '400', '650'),
+            'logo' =>fileUpload($request->file('logo'), 'parts-management/ parts-parent-brand', isset($id) ? static::find($id)->logo : ''),
             'status'      => $request->status == 'on' ? 1 : 0,
         ]);
     }
