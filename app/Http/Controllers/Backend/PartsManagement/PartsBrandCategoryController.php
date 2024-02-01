@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Backend\PartsManagement;
 
 use App\Http\Controllers\Controller;
 use App\Models\Backend\PartsManagement\PartsBrandCategory;
+use App\Models\Backend\PartsManagement\PartsParentBrand;
 use Illuminate\Http\Request;
 
 class PartsBrandCategoryController extends Controller
@@ -15,6 +16,7 @@ class PartsBrandCategoryController extends Controller
     {
         return view('backend.parts-management.parts-brand-category.index',[
             'partsBrandCategories'=>PartsBrandCategory::all(),
+            'partsParentBrands'    =>PartsParentBrand::all(),
         ]);
     }
 
@@ -23,7 +25,9 @@ class PartsBrandCategoryController extends Controller
      */
     public function create()
     {
-        //
+        return view('backend.parts-management.parts-brand-category.create',[
+            'partsParentBrands'    =>PartsParentBrand::all(),
+        ]);
     }
 
     /**
@@ -31,7 +35,8 @@ class PartsBrandCategoryController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        PartsBrandCategory::saveOrUpdatePartsBrandCategory($request);
+        return redirect()->route('admin.parts-brand-categories.index')->with('success','Parts Brand Category Create Successfully');
     }
 
     /**
@@ -47,7 +52,10 @@ class PartsBrandCategoryController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        return view('backend.parts-management.parts-brand-category.create',[
+            'partsParentBrands'    =>PartsParentBrand::all(),
+            'partsBrandCategory' => PartsBrandCategory::where('id',$id)->first(),
+        ]);
     }
 
     /**
@@ -55,7 +63,8 @@ class PartsBrandCategoryController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        PartsBrandCategory::saveOrUpdatePartsBrandCategory($request,$id);
+        return redirect()->route('admin.parts-brand-categories.index')->with('success','Parts Brand Category Updated Successfully');
     }
 
     /**
@@ -63,6 +72,14 @@ class PartsBrandCategoryController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $partsBrandCategory = PartsBrandCategory::where('id',$id)->first();
+        if ($partsBrandCategory)
+        {
+            if (file_exists($partsBrandCategory->image)){
+                unlink($partsBrandCategory->image);
+            }
+            $partsBrandCategory->delete();
+        }
+        return redirect()->route('admin.parts-brand-categories.index')->with('success','Parts Brand  Category Delete Successfully');
     }
 }

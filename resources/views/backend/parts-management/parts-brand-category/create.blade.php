@@ -16,6 +16,19 @@
                         @if(isset($partsBrandCategory))
                             @method('put')
                         @endif
+
+                        <div class="row mt-3">
+                            <label for="" class="col-md-4">Parts Parent Brand</label>
+                            <div class="col-md-8">
+                                <select name="parts_parent_brand_id" class=" form-control " data-toggle="select" data-placeholder="Choose ...">
+                                    <option value="">Select a Parts Parent Brand</option>
+                                    @foreach($partsParentBrands as $partsParentBrand)
+                                        <option value="{{ $partsParentBrand->id }}" {{ $errors->any() ? (old('parts_parent_brand_id')) :(isset($partsBrandCategory) && $partsBrandCategory->parts_parent_brand_id== $partsParentBrand->id ? 'selected' : '')}}> {{ $partsParentBrand->name }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            @error('parts_parent_brand_id') <span class="text-danger">{{ $errors->first('parts_parent_brand_id') }}</span>@enderror
+                        </div>
                         <div class="row mt-3">
                             <label for="" class="col-md-4">Name</label>
                             <div class="col-md-8">
@@ -24,9 +37,9 @@
                             @error('name') <span class="text-danger">{{ $errors->first('name') }}</span>@enderror
                         </div>
                         <div class="row mt-3">
-                            <label for="" class="col-md-4">Other Info</label>
+                            <label for="" class="col-md-4">Description</label>
                             <div class="col-md-8">
-                                <textarea type="text" name="other_info" class="form-control" placeholder="Bike Motor Type Other Info" id="" cols="30" rows="5">{{ isset($partsBrandCategory) ? $partsBrandCategory->other_info : '' }}</textarea>
+                                <textarea type="text" name="description" class="form-control" placeholder="Bike Motor Type Other Info" id="" cols="30" rows="5">{{ isset($partsBrandCategory) ? $partsBrandCategory->description : '' }}</textarea>
                             </div>
                         </div>
                         <div class="row mt-3">
