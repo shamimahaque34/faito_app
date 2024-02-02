@@ -29,7 +29,7 @@
                                         <option value="">Select a Bike Brand</option>
                                         @foreach ($bikeBrands as $bikeBrand)
                                             <option value="{{ $bikeBrand->id }}"
-                                                {{ $errors->any() ? old('bike_brand_id') : (isset($motorBike) && $motorBike->bike_brand_id == $bikebrand->id ? 'selected' : '') }}>
+                                                {{ $errors->any() ? old('bike_brand_id') : (isset($motorBike) && $motorBike->bike_brand_id == $bikeBrand->id ? 'selected' : '') }}>
                                                 {{ $bikeBrand->name }}</option>
                                         @endforeach
                                     </select>

@@ -11,7 +11,8 @@
                     <a href="{{ route('admin.motor-bikes.create') }}" class="btn btn-success btn-sm position-absolute me-5" style="right: 0"><i class="fa fa-plus-circle"></i></a>
                 </div>
                 <div class="card-body">
-                    <table class="table">
+                    <div class="table-responsive export-table">
+                    <table class="table" id="file-datatable">
                         <thead>
                         <th>#</th>
                         <th>Bike Brand Name</th>
@@ -38,11 +39,11 @@
                                 <td>{{ $motorBike->model_name }}</td>
                                 <td>{{ $motorBike->size }}</td>
                                 <td><img src="{{ asset($motorBike->image )}}" alt="" style="height: 60px"></td>
-                                <td>{{ $motorBike->status == 1 ? 'Published' : 'Unpublished' }}</td>
                                 <td>{{ $motorBike->variant }}</td>
                                 <td>{{ $motorBike->sku }}</td>
                                 <td>{{ $motorBike->slug }}</td>
-                                <td>{{ $motorBike->status }}</td>
+                                <td>{{ $motorBike->status == 1 ? 'Published' : 'Unpublished' }}</td>
+
                                 <td class="d-flex">
                                     <a href="{{ route('admin.motor-bikes.edit', $motorBike->id) }}" class="btn btn-sm btn-primary"><i class="fa fa-edit"></i></a>
                                     <form action="{{ route('admin.motor-bikes.destroy', $motorBike->id) }}" method="post" id="deleteItem">
@@ -58,5 +59,6 @@
                 </div>
             </div>
         </div>
+    </div>
     </div>
 @endsection
