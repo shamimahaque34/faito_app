@@ -11,7 +11,8 @@
                     <a href="{{ route('admin.bike-year-versions.create') }}" class="btn btn-success btn-sm position-absolute me-5" style="right: 0"><i class="fa fa-plus-circle"></i></a>
                 </div>
                 <div class="card-body">
-                    <table class="table">
+                    <div class="table-responsive export-table">
+                    <table class="table" id="file-datatable">
                         <thead>
                         <th>#</th>
                         <th>Name</th>
@@ -41,5 +42,6 @@
                 </div>
             </div>
         </div>
+    </div>
     </div>
 @endsection
