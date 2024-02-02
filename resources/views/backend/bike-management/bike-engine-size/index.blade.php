@@ -24,7 +24,7 @@
                             <tr>
                                 <td>{{ $loop->iteration }}</td>
                                 <td>{{ $bikeEngineSize->name }}</td>
-                                <td>{{ $bikeEngineSize->info }}</td>
+                                <td>{!! $bikeEngineSize->info !!}</td>
                                 <td>{{ $bikeEngineSize->status == 1 ? 'Published' : 'Unpublished' }}</td>
                                 <td class="d-flex">
                                     <a href="{{ route('admin.bike-engine-sizes.edit', $bikeEngineSize->id) }}" class="btn btn-sm btn-primary"><i class="fa fa-edit"></i></a>

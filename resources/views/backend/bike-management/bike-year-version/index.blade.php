@@ -24,7 +24,7 @@
                             <tr>
                                 <td>{{ $loop->iteration }}</td>
                                 <td>{{ $bikeYearVersion->name }}</td>
-                                <td>{{ $bikeYearVersion->info }}</td>
+                                <td>{!! $bikeYearVersion->info !!}</td>
                                 <td>{{ $bikeYearVersion->status == 1 ? 'Published' : 'Unpublished' }}</td>
                                 <td class="d-flex">
                                     <a href="{{ route('admin.bike-year-versions.edit', $bikeYearVersion->id) }}" class="btn btn-sm btn-primary"><i class="fa fa-edit"></i></a>

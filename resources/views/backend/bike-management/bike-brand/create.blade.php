@@ -26,7 +26,7 @@
                         <div class="row mt-3">
                             <label for="" class="col-md-4">Description</label>
                             <div class="col-md-8">
-                                <textarea type="text" name="description" class="form-control" placeholder="Bike Brand Description" id="" cols="30" rows="5">{{ isset($bikeBrand) ? $bikeBrand->description : '' }}</textarea>
+                                <textarea type="text" name="description" class="form-control ckeditor" placeholder="Bike Brand Description" id="" cols="30" rows="5">{{ isset($bikeBrand) ? $bikeBrand->description : '' }}</textarea>
                             </div>
                         </div>
                         <div class="row mt-3">

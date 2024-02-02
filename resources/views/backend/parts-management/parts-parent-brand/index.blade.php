@@ -25,7 +25,7 @@
                             <tr>
                                 <td>{{ $loop->iteration }}</td>
                                 <td>{{ $partsParentBrand->name }}</td>
-                                <td>{{ $partsParentBrand->description }}</td>
+                                <td>{!! $partsParentBrand->description !!}</td>
                                 <td><img src="{{ asset($partsParentBrand->logo )}}" alt="" style="height: 60px"></td>
                                 <td>{{ $partsParentBrand->status == 1 ? 'Published' : 'Unpublished' }}</td>
                                 <td class="d-flex">

@@ -6,7 +6,7 @@
 
 @section('body')
     <div class="row mt-5">
-        <div class="col-md-6 mx-auto">
+        <div class="col-md-12 mx-auto">
             <div class="card">
                 <div class="card-header">
                     <h3>{{ isset($partsProduct) ? 'update' : 'Create' }}Parts Product</h3>
@@ -20,8 +20,9 @@
                         @endif
 
                         <div class="row mt-3">
-                            <label for="" class="col-md-4">Parts Brand Category</label>
-                            <div class="col-md-8">
+                            <div class="col-md-4">
+                            <label for="" class="">Parts Brand Category</label>
+                            <div class="">
                                 <select name="parts_brand_category_id" class=" form-control " data-toggle="select" data-placeholder="Choose ...">
                                     <option value="">Select a Parts Brand Category</option>
                                     @foreach($partsBrandCategories as $partsBrandCategory)
@@ -31,21 +32,22 @@
                             </div>
                             @error('parts_brand_category_id') <span class="text-danger">{{ $errors->first('parts_brand_category_id') }}</span>@enderror
                         </div>
-                        <div class="row mt-3">
-                            <label for="" class="col-md-4">Title</label>
-                            <div class="col-md-8">
+                        <div class="col-md-4">
+                            <label for="" class="">Title</label>
+                            <div class="">
                                 <input type="text" name="title" class="form-control" value="{{ isset($partsProduct) ? $partsProduct->title : '' }}" placeholder="Parts Product Title" />
                             </div>
                             @error('title') <span class="text-danger">{{ $errors->first('title') }}</span>@enderror
                         </div>
 
-                        <div class="row mt-3">
-                            <label for="" class="col-md-4">Sub Title</label>
-                            <div class="col-md-8">
+                        <div class="col-md-4">
+                            <label for="" class="">Sub Title</label>
+                            <div class="">
                                 <input type="text" name="sub_title" class="form-control" value="{{ isset($partsProduct) ? $partsProduct->sub_title : '' }}" placeholder="Parts Product Sub Title" />
                             </div>
                             @error('sub_title') <span class="text-danger">{{ $errors->first('sub_title') }}</span>@enderror
                         </div>
+                    </div>
                         <div class="row mt-3">
                             <label for="" class="col-md-4">Short Description</label>
                             <div class="col-md-8">
@@ -68,15 +70,16 @@
                         </div>
 
                         <div class="row mt-3">
-                            <label for="" class="col-md-4">Sku</label>
-                            <div class="col-md-8">
+                            <div class="col-md-4">
+                            <label for="" class="">Sku</label>
+                            <div class="">
                                 <input type="text" name="sku" class="form-control" value="{{ isset($partsProduct) ? $partsProduct->sku : '' }}" placeholder="Parts Product Sku" />
                             </div>
                             @error('sku') <span class="text-danger">{{ $errors->first('sku') }}</span>@enderror
                         </div>
-                        <div class="row mt-3">
-                            <label for="" class="col-md-4">Main Image</label>
-                            <div class="col-md-8">
+                        <div class="col-md-4">
+                            <label for="" class="">Main Image</label>
+                            <div class="">
                                 <input type="file" name="main_image" class="form-control" placeholder="Parts Product Main Image" accept="">
                                 @if(isset($partsProduct))
                                     <img src="{{ asset($partsProduct->main_image) }}" alt="" style="height: 80px">
@@ -84,18 +87,19 @@
                             </div>
                         </div>
 
-                        <div class="row mt-3">
-                            <label for="" class="col-md-4">Sub Images</label>
-                            <div class="col-md-8">
-                                <input type="file" name="sub_images" class="form-control" placeholder="Parts Product Sub Images" accept="">
+                        <div class="col-md-4">
+                            <label for="" class="">Sub Images</label>
+                            <div class="">
+                                <input type="file" name="sub_images[]" multiple class="form-control" placeholder="Parts Product Sub Images" accept="">
                                 @if(isset($partsProduct))
                                     <img src="{{ asset($partsProduct->sub_images) }}" alt="" style="height: 80px">
                                 @endif
                             </div>
                         </div>
+                    </div>
                         <div class="row mt-3">
-                            <label for="" class="col-md-4">Status</label>
-                            <div class="col-md-8">
+                            <label for="" class="">Status</label>
+                            <div class="">
                                 <div class="material-switch">
                                     <input id="someSwitchOptionLight" name="status" type="checkbox" {{ isset($partsProduct) && $partsProduct->status == 0 ? '' : 'checked' }} />
                                     <label for="someSwitchOptionLight" class="label-light"></label>
@@ -105,7 +109,7 @@
                         <div class="row mt-3">
                             <label for="" class="col-md-4"></label>
                             <div class="col-md-8">
-                                <input type="submit" class="btn btn-success" value="{{ isset($partsProduct) ? 'update' : 'Create' }} Bike Motor Type">
+                                <input type="submit" class="btn btn-success" value="{{ isset($partsProduct) ? 'update' : 'Create' }} Parts Product">
                             </div>
                         </div>
                     </form>

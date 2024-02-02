@@ -25,7 +25,7 @@
                             <tr>
                                 <td>{{ $loop->iteration }}</td>
                                 <td>{{ $bikeMotorType->name }}</td>
-                                <td>{{ $bikeMotorType->other_info }}</td>
+                                <td>{!! $bikeMotorType->other_info !!}</td>
                                 <td><img src="{{ asset($bikeMotorType->image )}}" alt="" style="height: 60px"></td>
                                 <td>{{ $bikeMotorType->status == 1 ? 'Published' : 'Unpublished' }}</td>
                                 <td class="d-flex">

@@ -31,13 +31,17 @@
                             <tr>
                                 <td>{{ $loop->iteration }}</td>
                                 <td>{{ $partsProduct->partsBrandCategory->name }}</td>
-                                <td>{{ $partsProduct->name }}</td>
-                                <td>{{ $partsProduct->description }}</td>
-                                <td><img src="{{ asset($partsProduct->image )}}" alt="" style="height: 60px"></td>
+                                <td>{{ $partsProduct->title }}</td>
+                                <td>{{ $partsProduct->sub_title }}</td>
+                                <td>{!! $partsProduct->short_description !!}</td>
+                                <td>{!! $partsProduct->long_description !!}</td>
+                                <td>{!! $partsProduct->features !!}</td>
+                                <td>{{ $partsProduct->sku }}</td>
+                                <td><img src="{{ asset($partsProduct->main_image )}}" alt="" style="height: 60px"></td>
                                 <td>{{ $partsProduct->status == 1 ? 'Published' : 'Unpublished' }}</td>
                                 <td class="d-flex">
-                                    <a href="{{ route('admin.parts-brand-categories.edit', $partsProduct->id) }}" class="btn btn-sm btn-primary"><i class="fa fa-edit"></i></a>
-                                    <form action="{{ route('admin.parts-brand-categories.destroy', $partsProduct->id) }}" method="post" id="deleteItem">
+                                    <a href="{{ route('admin.parts-products.edit', $partsProduct->id) }}" class="btn btn-sm btn-primary"><i class="fa fa-edit"></i></a>
+                                    <form action="{{ route('admin.parts-products.destroy', $partsProduct->id) }}" method="post" id="deleteItem">
                                         @csrf
                                         @method('delete')
                                         <button type="submit" class="btn btn-sm btn-danger ms-1 delete-item"><i class="fa fa-trash"></i></button>
